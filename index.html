@@ -1,0 +1,884 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Casualty is a Horde Heroic raiding and Mythic+ guild on Mal'Ganis (US). Raids Friday and Saturday, 8:30 PM Eastern. Recruiting healers and ranged damage.">
+<meta name="theme-color" content="#15120F">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Casualty — Mal'Ganis (US)">
+<meta property="og:description" content="Horde Heroic raiding and Mythic+ on Mal'Ganis. Friday and Saturday, 8:30 PM Eastern. Recruiting healers and ranged damage.">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="%2315120F"/><path d="M16 3 L23 16 L16 29 L9 16 Z" fill="%23D9743A"/></svg>'>
+<style>
+/* Baseline the artifact host normally injects; required standalone. */
+:root{
+  color-scheme:light dark;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+body{margin:0}
+img{max-width:100%}
+/* The role filter toggles el.hidden; .cls sets display:flex and would win without this. */
+[hidden]{display:none!important}
+</style>
+<title>Casualty of Mal'Ganis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Eczar:wght@600;700;800&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap">
+
+<style>
+/* ---------- tokens: light (vellum + iron) ---------- */
+:root{
+  --bg:#E6E1D4;
+  --panel:#F0ECE1;
+  --inset:#D9D2C1;
+  --ink:#241E19;
+  --ink-2:#5A5047;
+  --dim:#857A6A;
+  --rule:#C5BBA7;
+  --rule-strong:#A99C84;
+  --accent:#A8431A;
+  --accent-soft:#C8703F;
+  --blood:#8E2420;
+  --fel:#4C7520;
+  --amber:#8E6712;
+  --shadow:0 1px 0 rgba(36,30,25,.06);
+
+  /* the roster panel keeps its own dark world in both themes */
+  --rp-bg:#17130F;
+  --rp-panel:#211B15;
+  --rp-rule:#372E25;
+  --rp-ink:#E9E1D1;
+  --rp-dim:#9A8C79;
+
+  --display:'Eczar',Georgia,'Times New Roman',serif;
+  --body:'Source Sans 3',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --data:'Barlow Semi Condensed','Arial Narrow',system-ui,sans-serif;
+  --maxw:1080px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#15120F;
+    --panel:#1E1A16;
+    --inset:#110E0C;
+    --ink:#E8E0D0;
+    --ink-2:#AB9E8B;
+    --dim:#7C7062;
+    --rule:#332C25;
+    --rule-strong:#4A3F34;
+    --accent:#D9743A;
+    --accent-soft:#E8A071;
+    --blood:#B03A2E;
+    --fel:#8FB84A;
+    --amber:#D7A32E;
+    --shadow:0 1px 0 rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15120F;
+  --panel:#1E1A16;
+  --inset:#110E0C;
+  --ink:#E8E0D0;
+  --ink-2:#AB9E8B;
+  --dim:#7C7062;
+  --rule:#332C25;
+  --rule-strong:#4A3F34;
+  --accent:#D9743A;
+  --accent-soft:#E8A071;
+  --blood:#B03A2E;
+  --fel:#8FB84A;
+  --amber:#D7A32E;
+  --shadow:0 1px 0 rgba(0,0,0,.4);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--body);font-size:16.5px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:20px}
+h1,h2,h3{font-family:var(--display);font-weight:700;text-wrap:balance;margin:0;line-height:1.14}
+p{margin:0}
+a{color:var(--accent);text-underline-offset:3px;text-decoration-thickness:1px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+.eyebrow{
+  font-family:var(--data);font-weight:600;font-size:12.5px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin:0;
+}
+.num{font-variant-numeric:tabular-nums}
+
+/* ---------- top bar ---------- */
+.topbar{
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:40;
+  background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--rule);
+}
+.topbar .wrap{display:flex;align-items:center;gap:18px;height:52px}
+.mark{font-family:var(--display);font-weight:800;letter-spacing:.06em;font-size:16px;text-transform:uppercase;color:var(--ink);text-decoration:none;white-space:nowrap}
+.mark span{color:var(--accent)}
+.navlinks{display:flex;gap:16px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.navlinks::-webkit-scrollbar{display:none}
+.navlinks a{
+  font-family:var(--data);font-weight:600;font-size:13px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--ink-2);text-decoration:none;white-space:nowrap;
+}
+.navlinks a:hover{color:var(--accent)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--rule)}
+#embers{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+.hero-grad{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(120% 90% at 50% 112%, color-mix(in srgb,var(--blood) 26%,transparent), transparent 62%),
+    repeating-linear-gradient(90deg,transparent 0 3px, color-mix(in srgb,var(--rule) 40%,transparent) 3px 4px);
+  opacity:.5;
+}
+.hero .wrap{position:relative;z-index:2;padding-block:56px 40px}
+.hero-title{
+  font-size:clamp(3.6rem,15vw,8.5rem);font-weight:800;letter-spacing:-.01em;
+  margin:14px 0 0;line-height:.9;
+}
+.hero-rule{height:2px;background:linear-gradient(90deg,var(--accent),var(--blood) 45%,transparent);margin:20px 0 18px;max-width:560px}
+.tagline{font-family:var(--display);font-weight:600;font-size:clamp(1.15rem,3.4vw,1.6rem);color:var(--ink-2);max-width:23ch;line-height:1.3}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+
+.btn{
+  font-family:var(--data);font-weight:600;font-size:14.5px;letter-spacing:.1em;text-transform:uppercase;
+  padding:11px 22px;border:1px solid var(--accent);background:var(--accent);color:#fff;
+  text-decoration:none;cursor:pointer;display:inline-block;transition:filter .15s;
+}
+.btn:hover{filter:brightness(1.1)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--rule-strong)}
+.btn.ghost:hover{border-color:var(--accent);color:var(--accent);filter:none}
+
+/* progress strip */
+.strip{display:flex;flex-wrap:wrap;gap:8px 38px;margin-top:36px;padding-top:24px;border-top:1px solid var(--rule)}
+.strip-item{display:flex;flex-direction:column;gap:2px}
+.strip-val{font-family:var(--display);font-weight:800;font-size:2rem;line-height:1;font-variant-numeric:tabular-nums}
+.strip-lab{font-family:var(--data);font-weight:600;font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--dim)}
+.badge{align-self:center;font-family:var(--data);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--fel);border:1px solid var(--fel);padding:5px 10px}
+
+/* ---------- sections ---------- */
+section{border-bottom:1px solid var(--rule)}
+section > .wrap{padding-block:60px}
+.sec-head{margin-bottom:32px}
+.sec-head h2{font-size:clamp(1.8rem,5vw,2.6rem);margin-top:8px}
+.sec-head p.lede{color:var(--ink-2);max-width:62ch;margin-top:12px;font-size:1.05rem}
+
+/* boss table */
+.tablewrap{overflow-x:auto;border:1px solid var(--rule);background:var(--panel)}
+table{border-collapse:collapse;width:100%;min-width:480px}
+caption{
+  text-align:left;font-family:var(--data);font-weight:600;font-size:12px;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--dim);padding:14px 16px;border-bottom:1px solid var(--rule);
+}
+th,td{padding:11px 16px;text-align:left;border-bottom:1px solid var(--rule)}
+thead th{
+  font-family:var(--data);font-weight:600;font-size:12px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--dim);
+}
+tbody tr:last-child td{border-bottom:0}
+td.boss{font-weight:600}
+th.d,td.d{text-align:center;width:66px}
+.kill{font-family:var(--data);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.kill.yes{color:var(--fel)}
+.kill.no{color:var(--dim)}
+.kill.now{color:var(--amber)}
+tbody tr.current td{background:color-mix(in srgb,var(--amber) 9%,transparent)}
+.tier-note{font-family:var(--data);font-size:13.5px;letter-spacing:.04em;color:var(--dim);margin-top:12px}
+
+/* pillars */
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.pillar{background:var(--panel);padding:26px 24px;display:flex;flex-direction:column;gap:10px}
+.pillar h3{font-size:1.3rem}
+.pillar .eyebrow{color:var(--accent)}
+.pillar p{color:var(--ink-2);font-size:.97rem}
+
+.honesty{margin-top:28px;border-left:3px solid var(--blood);padding:4px 0 4px 20px}
+.honesty h3{font-size:1.15rem;margin-bottom:10px}
+.honesty ul{margin:0;padding-left:20px;color:var(--ink-2)}
+.honesty li{margin-bottom:6px}
+
+/* schedule */
+.sched{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.night{border:1px solid var(--rule);background:var(--panel);padding:22px}
+.night.optional{border-style:dashed}
+.night-day{font-family:var(--display);font-weight:700;font-size:1.45rem}
+.night-time{font-family:var(--data);font-weight:600;font-size:1.35rem;letter-spacing:.02em;margin-top:6px;font-variant-numeric:tabular-nums}
+.night-tz{font-family:var(--data);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:2px}
+.night-local{margin-top:14px;padding-top:12px;border-top:1px dotted var(--rule-strong);font-size:.9rem;color:var(--ink-2);min-height:2.4em}
+.night-local b{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+.night-role{font-family:var(--data);font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin-top:14px}
+
+.countdown{
+  margin-top:20px;border:1px solid var(--rule-strong);background:var(--inset);
+  padding:16px 20px;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;
+}
+.countdown .lab{font-family:var(--data);font-weight:600;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--dim)}
+.countdown .val{font-family:var(--display);font-weight:700;font-size:1.25rem;font-variant-numeric:tabular-nums}
+
+.ritual{margin-top:36px}
+.ritual ol{list-style:none;margin:18px 0 0;padding:0;border-left:1px solid var(--rule-strong)}
+.ritual li{position:relative;padding:0 0 22px 24px}
+.ritual li:last-child{padding-bottom:0}
+.ritual li::before{
+  content:"";position:absolute;left:-4.5px;top:8px;width:8px;height:8px;
+  background:var(--accent);
+}
+.ritual .t{font-family:var(--data);font-weight:600;font-size:12.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);font-variant-numeric:tabular-nums}
+.ritual .d{color:var(--ink-2);font-size:.97rem}
+
+/* ---------- roster panel (permanently dark) ---------- */
+.roster{background:var(--rp-bg);color:var(--rp-ink);border:1px solid var(--rp-rule)}
+.roster-head{display:flex;flex-wrap:wrap;gap:14px;align-items:center;padding:16px 18px;border-bottom:1px solid var(--rp-rule)}
+.roster-head .eyebrow{color:var(--rp-dim)}
+.filters{display:flex;gap:8px;margin-left:auto;flex-wrap:wrap}
+.filters button{
+  font-family:var(--data);font-weight:600;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;
+  background:transparent;border:1px solid var(--rp-rule);color:var(--rp-dim);padding:6px 13px;cursor:pointer;
+}
+.filters button[aria-pressed="true"]{border-color:#D9743A;color:#F0C39C;background:rgba(217,116,58,.12)}
+.classgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:1px;background:var(--rp-rule)}
+.cls{background:var(--rp-panel);padding:14px 16px 14px 18px;position:relative;display:flex;flex-direction:column;gap:3px}
+.cls::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--cc,#888)}
+.cls-name{font-family:var(--data);font-weight:700;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--cc,#fff)}
+.cls-spec{font-size:.88rem;color:var(--rp-dim);line-height:1.45}
+.cls-status{
+  font-family:var(--data);font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-top:6px;
+}
+.cls-status em{display:block;font-style:normal;font-weight:600;font-size:10.5px;letter-spacing:.09em;color:var(--rp-dim);margin-top:3px}
+.s-high{color:#8FB84A}
+.s-open{color:#C9BCA6}
+.s-exc{color:#D7A32E}
+.s-closed{color:#6E6254}
+.cls[data-status="closed"] .cls-name{opacity:.55}
+.comp-row{display:grid;grid-template-columns:118px 1fr;gap:10px 18px;padding:15px 18px;border-bottom:1px solid var(--rp-rule);align-items:start}
+.comp-row:last-child{border-bottom:0}
+.comp-role{font-family:var(--data);font-weight:600;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--rp-dim)}
+.comp-role b{display:block;font-family:var(--display);font-weight:800;font-size:1.6rem;color:var(--rp-ink);letter-spacing:0;line-height:1.05;font-variant-numeric:tabular-nums}
+.comp-names{display:flex;flex-wrap:wrap;gap:7px 16px}
+.pname{display:inline-flex;align-items:center;gap:7px;font-family:var(--data);font-weight:600;font-size:15px;letter-spacing:.03em;color:var(--cc,#fff)}
+.pname::before{content:"";width:8px;height:8px;background:var(--cc,#888);flex:none}
+.comp-spec{flex-basis:100%;font-family:var(--data);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--rp-dim);margin-top:4px}
+@media(max-width:540px){.comp-row{grid-template-columns:1fr;gap:8px}.comp-role b{display:inline;font-size:1.1rem;margin-left:6px}}
+.roster-foot{padding:14px 18px;border-top:1px solid var(--rp-rule);font-size:.9rem;color:var(--rp-dim)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--data);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+
+/* two-column lists */
+.twocol{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:36px;margin-top:8px}
+.twocol h3{font-size:1.2rem;margin-bottom:14px}
+.twocol ul{margin:0;padding-left:20px;color:var(--ink-2)}
+.twocol li{margin-bottom:9px}
+.twocol li b{color:var(--ink);font-weight:600}
+
+/* apply */
+.apply{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;margin-top:8px}
+.card{border:1px solid var(--rule);background:var(--panel);padding:24px}
+.card h3{font-size:1.2rem;margin-bottom:8px}
+.card p{color:var(--ink-2);font-size:.96rem}
+.cmd{
+  display:block;margin-top:16px;background:var(--inset);border:1px solid var(--rule);
+  padding:11px 14px;font-family:var(--data);font-weight:600;font-size:16px;
+  letter-spacing:.05em;color:var(--ink);overflow-wrap:anywhere;
+}
+.cmd .slash{color:var(--accent)}
+.card .step{
+  font-family:var(--data);font-weight:600;font-size:12px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:6px;
+}
+
+/* inside */
+.officers{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:8px}
+.officer{background:var(--panel);padding:18px 20px}
+.officer .who{font-family:var(--display);font-weight:700;font-size:1.15rem}
+.officer .rank{font-family:var(--data);font-weight:600;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-top:2px}
+.officer .note{font-size:.88rem;color:var(--ink-2);margin-top:8px}
+
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.links a{
+  font-family:var(--data);font-weight:600;font-size:13px;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--rule-strong);color:var(--ink);text-decoration:none;padding:9px 15px;
+}
+.links a:hover{border-color:var(--accent);color:var(--accent)}
+
+footer{padding-block:40px;color:var(--dim);font-size:.87rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:baseline}
+footer .disc{max-width:60ch;line-height:1.5}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="mark" href="#top">Casu<span>alty</span></a>
+    <nav class="navlinks">
+      <a href="#progress">Progress</a>
+      <a href="#raids">Raid Nights</a>
+      <a href="#roster">Roster</a>
+      <a href="#recruiting">Recruiting</a>
+      <a href="#inside">Inside</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <canvas id="embers" aria-hidden="true"></canvas>
+  <div class="hero-grad" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="eyebrow">Horde &middot; Mal'Ganis (US) &middot; Raids 8:30 PM ET</p>
+    <h1 class="hero-title">Casualty</h1>
+    <div class="hero-rule" aria-hidden="true"></div>
+    <p class="tagline">Casual enough to laugh at the wipe. Serious enough to fix it.</p>
+
+    <div class="hero-ctas">
+      <a class="btn" href="#recruiting">We're recruiting</a>
+      <a class="btn ghost" href="#raids">Raid nights &amp; times</a>
+    </div>
+
+    <div class="strip">
+      <div class="strip-item"><span class="strip-val">8/8</span><span class="strip-lab">Normal</span></div>
+      <div class="strip-item"><span class="strip-val">5/8</span><span class="strip-lab">Heroic</span></div>
+      <div class="strip-item"><span class="strip-val">15</span><span class="strip-lab">Raid team</span></div>
+      <div class="strip-item"><span class="strip-val">142</span><span class="strip-lab">Members</span></div>
+      <span class="badge">Heroic progression</span>
+    </div>
+  </div>
+</div>
+
+<section id="progress">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Where we are &middot; Midnight Season 2</p>
+      <h2>The Venomous Abyss</h2>
+      <p class="lede">Eight bosses under the Coiled Isle, in the Vaults of Atal'Utek. Normal is cleared. We're five deep into Heroic and currently camped on The Twin Fangs, who have survived everything we've thrown at them so far &mdash; best pull left them at 37%. Ahead of the Curve is two bosses away and we intend to have it.</p>
+    </div>
+
+    <div class="tablewrap">
+      <table>
+        <caption>The Venomous Abyss &mdash; boss progression</caption>
+        <thead>
+          <tr>
+            <th scope="col">Boss</th>
+            <th scope="col" class="d">Normal</th>
+            <th scope="col" class="d">Heroic</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="boss">Nek'zali the Soulcoiler</td><td class="d"><span class="kill yes">Down</span></td><td class="d"><span class="kill yes">Down</span></td></tr>
+          <tr><td class="boss">Entombed Sentinels</td><td class="d"><span class="kill yes">Down</span></td><td class="d"><span class="kill yes">Down</span></td></tr>
+          <tr><td class="boss">The Lost Explorers</td><td class="d"><span class="kill yes">Down</span></td><td class="d"><span class="kill yes">Down</span></td></tr>
+          <tr><td class="boss">Vashnik the Malignant</td><td class="d"><span class="kill yes">Down</span></td><td class="d"><span class="kill yes">Down</span></td></tr>
+          <tr><td class="boss">Sszorak</td><td class="d"><span class="kill yes">Down</span></td><td class="d"><span class="kill yes">Down</span></td></tr>
+          <tr class="current"><td class="boss">The Twin Fangs</td><td class="d"><span class="kill yes">Down</span></td><td class="d"><span class="kill now">37%</span></td></tr>
+          <tr><td class="boss">The Coiled Altar</td><td class="d"><span class="kill yes">Down</span></td><td class="d"><span class="kill no">&mdash;</span></td></tr>
+          <tr><td class="boss">Ula'tek</td><td class="d"><span class="kill yes">Down</span></td><td class="d"><span class="kill no">&mdash;</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tier-note">Also cleared: <b>The Tidebound Grotto</b> &mdash; Nymrissa Wavecaller down on Normal and Heroic. Every night is logged to Warcraft Logs &mdash; not to name and shame, but so we can find out which orb nobody soaked.</p>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">What Casualty is</p>
+      <h2>Three things, honestly</h2>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar">
+        <p class="eyebrow">The raid</p>
+        <h3>Two nights, no more</h3>
+        <p>Six hours a week, start to finish. We expect you sharp for those six and we expect nothing from you the other 162. Heroic progression on a schedule adults can actually keep.</p>
+      </div>
+      <div class="pillar">
+        <p class="eyebrow">The keys</p>
+        <h3>Groups every night</h3>
+        <p>There is almost always a key going. Push groups for people chasing rating, and patient runs for people seeing a dungeon for the first time. Both are real groups, not one pretending to be the other.</p>
+      </div>
+      <div class="pillar">
+        <p class="eyebrow">The rest of it</p>
+        <h3>Old raids and bad ideas</h3>
+        <p>Transmog runs, achievement nights, mount farms, someone dragging eleven people into Classic at midnight. No signup, no pressure, no one keeping score.</p>
+      </div>
+    </div>
+
+    <div class="honesty">
+      <h3>We're probably not for you if&hellip;</h3>
+      <ul>
+        <li>You want a Mythic raid team. We run Heroic, we're going to finish it, and that's where this group is pointed.</li>
+        <li>You want loot council. We use group loot and trust people to trade.</li>
+        <li>You go quiet when a raid leader tells you to move. Being told to fix something isn't an insult here.</li>
+        <li>You only log in on raid night and want a permanent spot. The roster follows the people who show up.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="raids">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">The schedule</p>
+      <h2>Raid nights</h2>
+      <p class="lede">Two nights a week, both at 8:30 PM Eastern. Invites go out fifteen minutes early and first pull is at 8:30 sharp, whether or not everyone is repaired.</p>
+    </div>
+
+    <div class="sched">
+      <div class="night" data-day="5" data-hour="20" data-minute="30">
+        <div class="night-day">Friday</div>
+        <div class="night-time">8:30 PM</div>
+        <div class="night-tz">Eastern (ET)</div>
+        <div class="night-local" data-local>&nbsp;</div>
+        <div class="night-role">Heroic progression</div>
+      </div>
+      <div class="night" data-day="6" data-hour="20" data-minute="30">
+        <div class="night-day">Saturday</div>
+        <div class="night-time">8:30 PM</div>
+        <div class="night-tz">Eastern (ET)</div>
+        <div class="night-local" data-local>&nbsp;</div>
+        <div class="night-role">Heroic progression</div>
+      </div>
+    </div>
+
+    <div class="countdown">
+      <span class="lab">Next pull</span>
+      <span class="val" id="cd-when">&mdash;</span>
+      <span class="lab" id="cd-in"></span>
+    </div>
+
+    <div class="ritual">
+      <h3>What a Friday actually looks like</h3>
+      <ol>
+        <li>
+          <div class="t">8:15 PM &middot; Invites</div>
+          <div class="d">Get in voice. Repair, flask, food, rune. If you need a summon, say so now rather than at 8:31.</div>
+        </li>
+        <li>
+          <div class="t">8:30 PM &middot; First pull</div>
+          <div class="d">Straight into progression. The plan goes out before the raid, so nobody is hearing it for the first time.</div>
+        </li>
+        <li>
+          <div class="t">Halfway &middot; Break</div>
+          <div class="d">Ten minutes. Actually ten.</div>
+        </li>
+        <li>
+          <div class="t">End of night &middot; Last pull</div>
+          <div class="d">We call it on the clock, not on the boss. If something is at 4% we might steal one more, and that's the only overtime you'll ever be asked for.</div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section id="roster">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">The raid team</p>
+      <h2>Who's in the group</h2>
+      <p class="lede">Fifteen raiders on the Heroic team. That's the whole thing &mdash; no hidden bench, no paper roster. It's enough to raid and not quite enough to absorb a bad week, which is most of why we're recruiting.</p>
+    </div>
+
+    <div class="roster">
+      <div class="roster-head">
+        <p class="eyebrow">Group composition</p>
+      </div>
+
+      <div class="comp-row">
+        <div class="comp-role">Tanks <b>3</b></div>
+        <div class="comp-names">
+          <span class="pname" style="--cc:#C41E3A">M&eacute;ridius</span>
+          <span class="pname" style="--cc:#C41E3A">Pankers</span>
+          <span class="pname" style="--cc:#C41E3A">Xinroc</span>
+          <span class="comp-spec">Three Blood Death Knights</span>
+        </div>
+      </div>
+
+      <div class="comp-row">
+        <div class="comp-role">Healers <b>3</b></div>
+        <div class="comp-names">
+          <span class="pname" style="--cc:#FF7C0A">Warmaku</span>
+          <span class="pname" style="--cc:#F48CBA">Elrozei</span>
+          <span class="pname" style="--cc:#F48CBA">Odyesus</span>
+          <span class="comp-spec">Restoration Druid &middot; two Holy Paladins</span>
+        </div>
+      </div>
+
+      <div class="comp-row">
+        <div class="comp-role">DPS <b>10</b></div>
+        <div class="comp-names">
+          <span class="pname" style="--cc:#C41E3A">Xinroc</span>
+          <span class="pname" style="--cc:#A330C9">Sparthos</span>
+          <span class="pname" style="--cc:#AAD372">Daoiee</span>
+          <span class="pname" style="--cc:#3FC7EB">Dieselmage</span>
+          <span class="pname" style="--cc:#00FF98">Imartyr</span>
+          <span class="pname" style="--cc:#0070DD">Gurbbie</span>
+          <span class="pname" style="--cc:#8788EE">Maxer</span>
+          <span class="pname" style="--cc:#8788EE">Soulsîstah</span>
+          <span class="pname" style="--cc:#C69B6D">Canmandy</span>
+          <span class="pname" style="--cc:#C69B6D">&szlig;ar</span>
+          <span class="comp-spec">Xinroc swaps between tanking and damage</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="recruiting">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Recruiting</p>
+      <h2>Who we're short on</h2>
+      <p class="lede">These are the actual gaps in the group above, not a wishlist. A guild with no Priest, no Evoker and exactly one Shaman doesn't have to guess what it's missing. That said, a good application beats a listed need every time &mdash; if your class says closed and you still want in, apply anyway and tell us why.</p>
+    </div>
+
+    <div class="roster">
+      <div class="roster-head">
+        <p class="eyebrow">Raid roster needs</p>
+        <div class="filters" role="group" aria-label="Filter by role">
+          <button type="button" data-role="all" aria-pressed="true">All</button>
+          <button type="button" data-role="tank" aria-pressed="false">Tank</button>
+          <button type="button" data-role="healer" aria-pressed="false">Healer</button>
+          <button type="button" data-role="dps" aria-pressed="false">DPS</button>
+        </div>
+      </div>
+
+      <div class="classgrid" id="classgrid">
+        <div class="cls" data-roles="healer dps" data-status="high" style="--cc:#FFFFFF">
+          <span class="cls-name">Priest</span>
+          <span class="cls-spec">Discipline &middot; Holy &middot; Shadow</span>
+          <span class="cls-status s-high">High need<em>none on the roster</em></span>
+        </div>
+        <div class="cls" data-roles="healer dps" data-status="high" style="--cc:#33937F">
+          <span class="cls-name">Evoker</span>
+          <span class="cls-spec">Preservation &middot; Augmentation &middot; Devastation</span>
+          <span class="cls-status s-high">High need<em>none on the roster</em></span>
+        </div>
+        <div class="cls" data-roles="healer" data-status="high" style="--cc:#0070DD">
+          <span class="cls-name">Shaman</span>
+          <span class="cls-spec">Restoration</span>
+          <span class="cls-status s-high">High need<em>one Shaman, and he's DPS</em></span>
+        </div>
+        <div class="cls" data-roles="healer" data-status="high" style="--cc:#00FF98">
+          <span class="cls-name">Monk</span>
+          <span class="cls-spec">Mistweaver</span>
+          <span class="cls-status s-high">High need<em>healers only</em></span>
+        </div>
+        <div class="cls" data-roles="dps" data-status="open" style="--cc:#FF7C0A">
+          <span class="cls-name">Druid</span>
+          <span class="cls-spec">Balance</span>
+          <span class="cls-status s-open">Open<em>ranged damage</em></span>
+        </div>
+        <div class="cls" data-roles="dps" data-status="open" style="--cc:#AAD372">
+          <span class="cls-name">Hunter</span>
+          <span class="cls-spec">Marksmanship &middot; Beast Mastery</span>
+          <span class="cls-status s-open">Open<em>ranged damage</em></span>
+        </div>
+        <div class="cls" data-roles="dps" data-status="open" style="--cc:#3FC7EB">
+          <span class="cls-name">Mage</span>
+          <span class="cls-spec">Any spec</span>
+          <span class="cls-status s-open">Open<em>ranged damage</em></span>
+        </div>
+        <div class="cls" data-roles="dps" data-status="open" style="--cc:#FFF468">
+          <span class="cls-name">Rogue</span>
+          <span class="cls-spec">Any spec</span>
+          <span class="cls-status s-open">Open<em>none on the roster</em></span>
+        </div>
+        <div class="cls" data-roles="dps" data-status="closed" style="--cc:#C41E3A">
+          <span class="cls-name">Death Knight</span>
+          <span class="cls-spec">Unholy &middot; Frost</span>
+          <span class="cls-status s-closed">Closed<em>three on the roster</em></span>
+        </div>
+        <div class="cls" data-roles="tank" data-status="closed" style="--cc:#C41E3A">
+          <span class="cls-name">Tanks</span>
+          <span class="cls-spec">All specs</span>
+          <span class="cls-status s-closed">Closed<em>three tanks for two seats</em></span>
+        </div>
+      </div>
+
+      <div class="roster-foot">
+        <div class="legend">
+          <span class="s-high">&#9632; High need</span>
+          <span class="s-open">&#9632; Open</span>
+          <span class="s-exc">&#9632; Exceptional only</span>
+          <span class="s-closed">&#9632; Closed</span>
+        </div>
+        <p style="margin-top:10px">Social and Mythic+ ranks are <b style="color:#8FB84A">always open</b>, every class, every spec, no ilvl check, no interview. Just ask.</p>
+      </div>
+    </div>
+
+    <div class="twocol" style="margin-top:44px">
+      <div>
+        <h3>What we ask of raiders</h3>
+        <ul>
+          <li><b>Roughly 80% attendance.</b> Life happens &mdash; post in the absence channel and it's fine. Ghosting is not.</li>
+          <li><b>Show up consumed.</b> Flask, food, weapon buff, augment rune, potions. We're not carrying your repair bill or your flask.</li>
+          <li><b>Watch the fight before we pull it.</b> A four-minute video is cheaper than twenty wipes.</li>
+          <li><b>Sim yourself.</b> Not for us &mdash; so you stop guessing about your own gear.</li>
+          <li><b>Be in voice.</b> You don't have to talk. You do have to hear the call.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>What you get back</h3>
+        <ul>
+          <li><b>Group loot, no council, no DKP.</b> If it's a bigger upgrade for someone else, trade it. The one rule on top of that is trials come after the roster.</li>
+          <li><b>A real bench policy.</b> If you're sat, you're told why, and you're not sat two weeks running.</li>
+          <li><b>Logs and VODs after every night</b>, posted without commentary unless you ask for it.</li>
+          <li><b>Keys, alt runs and dumb old-content nights</b> that have nothing to do with your raid spot.</li>
+          <li><b>Officers who answer.</b> Not always instantly, but always.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="apply" style="margin-top:44px">
+      <div class="card">
+        <p class="step">Easiest way in</p>
+        <h3>Apply from the Guild Finder</h3>
+        <p>In game, open <b>Guild &amp; Communities</b> (default hotkey <b>J</b>) and go to the <b>Guild Finder</b> tab &mdash; it's there for any character without a guild. Search <b>Casualty</b>, tick what you're actually after, set your availability, and send it. It drops straight into our applicant list and an officer answers within a day or two.</p>
+      </div>
+      <div class="card">
+        <p class="step">Or talk to a person</p>
+        <h3>Whisper the guild master</h3>
+        <span class="cmd"><span class="slash">/w</span> Odyesus</span>
+        <p style="margin-top:14px">Usually on in the evenings, Eastern. Honest questions get honest answers, including &ldquo;you'd be happier somewhere else.&rdquo; Any member can put you in front of an officer too &mdash; if you run a key with a Casualty tag, just ask them.</p>
+      </div>
+      <div class="card">
+        <p class="step">Once you're in</p>
+        <h3>What a trial looks like</h3>
+        <p>Two to three weeks raiding with us. Traded upgrades go to the established roster ahead of trials during that stretch &mdash; you'll still gear up, just not in front of someone who's been in every pull since week one. It lifts as soon as your trial does. At the end an officer gives you a straight answer and tells you what it was based on.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="inside">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">For members</p>
+      <h2>Inside the guild</h2>
+      <p class="lede">The stuff you need once you're already in. Bookmark this bit.</p>
+    </div>
+
+    <h3 style="font-size:1.2rem;margin-bottom:14px">Officers</h3>
+    <div class="officers">
+      <div class="officer">
+        <div class="who">Odyesus</div>
+        <div class="rank">Guild Master &middot; Paladin</div>
+      </div>
+      <div class="officer">
+        <div class="who">Pankers</div>
+        <div class="rank">Officer &middot; Death Knight</div>
+      </div>
+      <div class="officer">
+        <div class="who">Xinroc</div>
+        <div class="rank">Officer &middot; Death Knight</div>
+      </div>
+      <div class="officer">
+        <div class="who">Canmandy</div>
+        <div class="rank">Officer &middot; Warrior</div>
+      </div>
+      <div class="officer">
+        <div class="who">Soulsîstah</div>
+        <div class="rank">Officer &middot; Warlock</div>
+      </div>
+    </div>
+    <p class="tier-note">Any of them can answer a question, hand out an invite, or put an application in front of the group. Odyesus has the final say.</p>
+
+    <h3 style="font-size:1.2rem;margin:40px 0 14px">Loot rules</h3>
+    <div class="twocol">
+      <div>
+        <ul style="margin:0;padding-left:20px;color:var(--ink-2)">
+          <li><b>Group loot, always.</b> Roll on what you'd use.</li>
+          <li><b>Trade genuine upgrades.</b> Nobody tracks it; everybody notices.</li>
+        </ul>
+      </div>
+      <div>
+        <ul style="margin:0;padding-left:20px;color:var(--ink-2)">
+          <li><b>Tier and catalyst charges</b> go to the roster first during progression, then to whoever wants them.</li>
+          <li><b>Trials sit behind the roster</b> on traded upgrades until their trial ends. Not personal, not permanent.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="font-size:1.2rem;margin:40px 0 14px">Links</h3>
+    <div class="links">
+      <a href="https://worldofwarcraft.blizzard.com/en-gb/worldsoul/us/armory/guild/malganis/casualty" target="_blank" rel="noopener">Armory</a>
+      <a href="https://raider.io/guilds/us/malganis/Casualty" target="_blank" rel="noopener">Raider.IO</a>
+      <a href="https://www.warcraftlogs.com/guild/us/malganis/Casualty" target="_blank" rel="noopener">Warcraft Logs</a>
+      <a href="https://www.wowprogress.com/guild/us/mal-ganis/Casualty" target="_blank" rel="noopener">WoWProgress</a>
+      <a href="https://www.wowhead.com/guide/midnight/raids/the-venomous-abyss-overview-location-rewards-bosses" target="_blank" rel="noopener">Raid guides</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span><b style="font-family:var(--display);letter-spacing:.05em">CASUALTY</b> &middot; Horde &middot; Mal'Ganis (US) &middot; Founded 2024</span>
+    <span class="disc">Not affiliated with or endorsed by Blizzard Entertainment. World of Warcraft and all related marks are property of Blizzard Entertainment, Inc.</span>
+  </div>
+</footer>
+
+<script>
+/* ---------- role filter ---------- */
+(function(){
+  var btns = document.querySelectorAll('.filters button');
+  var cards = document.querySelectorAll('#classgrid .cls');
+  btns.forEach(function(b){
+    b.addEventListener('click', function(){
+      var role = b.dataset.role;
+      btns.forEach(function(o){ o.setAttribute('aria-pressed', String(o === b)); });
+      cards.forEach(function(c){
+        c.hidden = !(role === 'all' || c.dataset.roles.split(' ').indexOf(role) !== -1);
+      });
+    });
+  });
+})();
+
+/* ---------- server time -> viewer's local time ---------- */
+(function(){
+  var ZONE = 'America/New_York';
+  var WD = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+  function zoneOffsetMinutes(date){
+    try{
+      var f = new Intl.DateTimeFormat('en-US',{timeZone:ZONE, timeZoneName:'longOffset'});
+      var part = f.formatToParts(date).find(function(p){ return p.type === 'timeZoneName'; });
+      var m = part && part.value.match(/GMT([+-])(\d{1,2})(?::(\d{2}))?/);
+      if(!m) return -240;
+      return (m[1] === '-' ? -1 : 1) * (parseInt(m[2],10)*60 + parseInt(m[3]||'0',10));
+    }catch(e){ return -240; }
+  }
+  function zoneParts(date){
+    var f = new Intl.DateTimeFormat('en-US',{timeZone:ZONE, year:'numeric', month:'numeric', day:'numeric', weekday:'short'});
+    var o = {};
+    f.formatToParts(date).forEach(function(p){ o[p.type] = p.value; });
+    return o;
+  }
+  function instantFor(y,mo,d,h,mi){
+    var base = Date.UTC(y, mo-1, d, h, mi);
+    var t = base + 300*60000;
+    for(var i=0;i<2;i++){ t = base - zoneOffsetMinutes(new Date(t))*60000; }
+    return new Date(t);
+  }
+  function nextOccurrence(weekday, hour, minute){
+    var now = Date.now();
+    for(var i=0;i<9;i++){
+      var p = zoneParts(new Date(now + i*86400000));
+      if(WD.indexOf(p.weekday) !== weekday) continue;
+      var inst = instantFor(+p.year, +p.month, +p.day, hour, minute);
+      if(inst.getTime() > now) return inst;
+    }
+    return null;
+  }
+
+  var localZone = '';
+  try{ localZone = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; }catch(e){}
+  var fmtDayTime = new Intl.DateTimeFormat(undefined,{weekday:'long', hour:'numeric', minute:'2-digit'});
+
+  var soonest = null, soonestEl = null;
+
+  document.querySelectorAll('.night').forEach(function(night){
+    var day = +night.dataset.day,
+        hour = +night.dataset.hour,
+        minute = +(night.dataset.minute || 0);
+    var out = night.querySelector('[data-local]');
+    var s = nextOccurrence(day, hour, minute);
+    if(!s || !out) return;
+
+    if(localZone === ZONE){
+      out.innerHTML = 'You’re already on Eastern.';
+    }else{
+      out.innerHTML = 'Your time: <b>' + fmtDayTime.format(s) + '</b>';
+    }
+    if(!soonest || s < soonest){ soonest = s; soonestEl = night.querySelector('.night-day').textContent; }
+  });
+
+  if(localZone && localZone !== ZONE){
+    var foot = document.querySelector('#raids .sched');
+    if(foot){
+      var note = document.createElement('p');
+      note.className = 'tier-note';
+      note.style.gridColumn = '1 / -1';
+      note.textContent = 'Local times shown for ' + localZone.replace(/_/g,' ') + '.';
+      foot.appendChild(note);
+    }
+  }
+
+  var when = document.getElementById('cd-when');
+  var inEl = document.getElementById('cd-in');
+  function tick(){
+    if(!soonest || !when) return;
+    if(soonest.getTime() < Date.now()){ location.reload(); return; }
+    when.textContent = soonestEl + ', 8:30 PM ET';
+    var ms = soonest.getTime() - Date.now();
+    var d = Math.floor(ms/86400000), h = Math.floor(ms/3600000)%24, m = Math.floor(ms/60000)%60;
+    inEl.textContent = 'in ' + (d ? d + 'd ' : '') + h + 'h ' + m + 'm';
+  }
+  tick();
+  setInterval(tick, 30000);
+})();
+
+/* ---------- hero embers ---------- */
+(function(){
+  var c = document.getElementById('embers');
+  if(!c) return;
+  var reduce = false;
+  try{ reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){}
+  var ctx = c.getContext('2d');
+  if(!ctx) return;
+
+  var parts = [], w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+  function size(){
+    var r = c.getBoundingClientRect();
+    w = r.width; h = r.height;
+    c.width = Math.max(1, w*dpr); c.height = Math.max(1, h*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  function seed(){
+    parts = [];
+    var n = Math.round(Math.min(42, Math.max(14, w/26)));
+    for(var i=0;i<n;i++){
+      parts.push({
+        x: Math.random()*w,
+        y: Math.random()*h,
+        r: 0.6 + Math.random()*1.5,
+        vy: -(0.06 + Math.random()*0.22),
+        vx: (Math.random()-0.5)*0.12,
+        a: 0.12 + Math.random()*0.42,
+        p: Math.random()*Math.PI*2
+      });
+    }
+  }
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    for(var i=0;i<parts.length;i++){
+      var p = parts[i];
+      if(!reduce){
+        p.y += p.vy; p.p += 0.012;
+        p.x += p.vx + Math.sin(p.p)*0.16;
+        if(p.y < -6){ p.y = h + 6; p.x = Math.random()*w; }
+      }
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(217,116,58,' + p.a.toFixed(3) + ')';
+      ctx.fill();
+    }
+    if(!reduce) requestAnimationFrame(draw);
+  }
+  size(); seed(); draw();
+  var t;
+  window.addEventListener('resize', function(){
+    clearTimeout(t);
+    t = setTimeout(function(){ size(); seed(); if(reduce) draw(); }, 200);
+  });
+})();
+</script>
+</body>
+</html>
